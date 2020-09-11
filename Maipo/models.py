@@ -6,7 +6,7 @@ class Productor (models.Model):
     correo = models.CharField(max_length=100)
     rut = models.CharField(max_length=10)
     edad = models.CharField(max_length=3)
-    telofono = models.CharField(max_length=10)
+    telefono = models.CharField(max_length=10)
     genero = models.CharField(max_length=10)
     direccion = models.CharField(max_length=10)
     nacionalidad = models.CharField(max_length=30)

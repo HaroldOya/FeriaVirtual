@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<main>
+        <div class="banner">
+                <h1>¡Feria Virtual! lugar donde encontrar los mejores precios</h1>
+            </div>
+
+        <div class="content-all">
+                <div class="content-img" id="img1">
+                    <a href="#img5" class="icon-left-open"></a>
+                    <img src="{% static 'img/img6.png' %}" alt="imagen carrusel 5">
+                    <a href="#img2" class="icon-right-open"></a>
+                </div>
+                <div class="content-img" id="img2">
+                    <a href="#img1" class="icon-left-open"></a>
+                    <img src="{% static 'img/img7.png' %}" alt="imagen carrusel 4">
+                    <a href="#img3" class="icon-right-open"></a>
+                    <div class="content-details">
+                        <h3>Bienvenido a Feria Virtual</h3>
+                        <p>El lugar donde encontrar los mejores precios</p>
+                        <input type="button" value="Informate más" onclick="location='galeria.html'"><br><br>
+                        <h3>Revisa nuestros productos</h3>
+                    </div>
+                </div>
+                <div class="content-img" id="img3">
+                    <a href="#img2" class="icon-left-open"></a>
+                    <img src="{% static 'img/img8.png' %}" alt="imagen carrusel 3">
+                    <a href="#img4" class="icon-right-open"></a>
+                </div>
+                <div class="content-img" id="img4">
+                    <a href="#img3" class="icon-left-open"></a>
+                    <img src="{% static 'img/img9.png' %}" alt="imagen carrusel 2">
+                    <a href="#img5" class="icon-right-open"></a>
+                </div>
+                <div class="content-img" id="img5">
+                    <a href="#img4" class="icon-left-open"></a>
+                    <img src="{% static 'img/img10.png' %}" alt="imagen carrusel 1">
+                    <a href="#img1" class="icon-right-open"></a>
+                </div>
+            </div>
+            <br>
+            <br>
+
+            <div class="banner">
+                <h1>Sobre Nosotros</h1>
+            </div>
+        <div class="desc">
+            <div class="texto">
+                <h1>Quienes somos</h1>
+                <p>
+                    <b>Gran Maipo</b> está encargado de ofrecer una cantidad variada de productos, para ello, nos encargamos de trabajar con distintos productores
+                    que se encargan de publicar sus productos, para que usted pueda elegir de acuerdo a sus necesidades. 
+                </p>
+            </div>
+            <div class="texto">
+                <h1>Misión</h1>
+                <p>
+                    Nuestra mision es entregar productos de calidad a nuestro clientes segun sus necesidades, es por ello que nos aseguramos de entregar el mejor stock segun calidad y precio 
+                    a nuestros consumidores.  
+                </p>
+
+            </div>
+
+        </div>
+</main>
+{% endblock %}

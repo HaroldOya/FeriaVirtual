@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>Feria Virtual</title>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="icon" href="{% static 'img/logo50.png' %}">
+    <link rel="stylesheet" href="{% static 'styles/main.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/fontello.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/responsivo.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/menu.css' %}">
+</head>
+<body background="{% static 'img/fondo1.jpg' %}" >
+
+<header> <a href="{% url 'index' %}"><img src="{% static 'img/logo100.png' %}" alt="logo MetropoGames"></a><div class="ti">Feria Virtual</div> </header>
+<nav>
+    <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <a href="{% url 'index' %}">Inicio</a>
+            <a href="">Galeria</a>
+            <a href="">Registrarse</a>
+            <a href="{% url 'login' %}">Inicio Sesión</a>
+          </div>
+            <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menú</span>
+</nav>
+<script src="{% static 'js/menu.js' %}"></script>
+{% block content %}
+{% endblock %}
+<footer>
+    <table>
+            <tr>
+                <td>Email</td>
+                <td>
+                    <a href="mailto:metropogames@duoc.cl">
+                        feriavirtual@duoc.cl
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td>Teléfono</td>
+                <td>
+                    <a href="tel:+56985753005">
+                        +569 9 534 31 55
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    &copy; Todos los derechos reservados
+                </td>
+            </tr>
+        </table>
+    <div class="redes">
+            <a href="http://www.facebook.com"><img src="img/face50.png" alt="facebook icono" ></a>
+            <a href="https://www.instagram.com/"><img src="img/insta50.png" alt="instagram icono" ></a>
+            <a href="https://www.google.com"><img src="img/google50.png" alt="google icono" ></a>
+            <a href="https://mail.google.com"><img src="img/correo50.png" alt="correo icono" ></a>
+        </div>
+</footer>
+</body>
+</html>
