@@ -8,6 +8,7 @@ from django.contrib.auth import authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login as do_login
 from django.contrib.auth.forms import UserCreationForm
+from .models import Producto
 
 # Create your views here.
 
@@ -75,4 +76,9 @@ def logout(request):
 def galeria(request):
     return render(request, 'templates/galeria.html' )
 
+def lista_productos(request):
+    return render(request, 'lista_productos.html')
+
+def listado_productos(request):
+    return render(request, 'Maipo/lista_productos.html', {'Maipo': Producto})
 

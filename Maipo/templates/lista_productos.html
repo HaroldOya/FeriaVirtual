@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+{% for Producto in Productos %} {{ Producto }}
+
+<div>
+    <p> nombre: {{ Producto.nombre }}</p>
+    <p> Descripcion: {{ Producto.text|linebreaksbr }}</p>
+    <p> Precio {{ Producto.precio}} </p>
+</div>
+
+
+{% endfor %}
+
+
+{% endblock %}
