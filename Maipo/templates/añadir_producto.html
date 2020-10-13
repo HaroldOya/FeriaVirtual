@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<h2>Añadir nuevo producto</h2>
+
+<div class ="formulario">
+    <form action=" " method="POST">
+        {% csrf_token %}
+       <table>
+        {{ form.as_table }}
+       </table>
+    
+       <input type="submit" value="Enviar">
+       <input type="reset" value="Borrar">
+    
+    </form>    
+</div>
+
+{{mensaje}}
+
+{% endblock %}

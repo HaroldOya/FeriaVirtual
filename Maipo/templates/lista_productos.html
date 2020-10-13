@@ -2,16 +2,23 @@
 {% load static %}
 {% block content %}
 
-{% for Producto in Productos %} {{ Producto }}
 
-<div>
-    <p> nombre: {{ Producto.nombre }}</p>
-    <p> Descripcion: {{ Producto.text|linebreaksbr }}</p>
-    <p> Precio {{ Producto.precio}} </p>
-</div>
+  <table>
+      <tr>Nombre: </tr>
+      <tr>Descripcion: </tr>
+      <tr>Precio: </tr>
 
+    {% for p in productos %}
+    <tr>
+        <td>{{p.nombre}}</td>
+        <td>{{p.descripcion}}</td>
+        <td>{{p.precio}}</td>
+    </tr>
+    
+    {% endfor %}
 
-{% endfor %}
+  </table>
+
 
 
 {% endblock %}

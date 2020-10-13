@@ -1,5 +1,6 @@
 from django import forms
-from .models import Productor
+from django.forms import ModelForm
+from .models import Productor,Producto
 
 class PostForm(forms.ModelForm):
 
@@ -16,3 +17,9 @@ class PostForm(forms.ModelForm):
             'direccion': forms.TextInput(attrs={'class':'Form'}),
             'nacionalidad': forms.TextInput(attrs={'class':'Form'}),            
         }
+
+class ProductoForm(ModelForm):
+
+    class Meta:
+        model = Producto
+        fields = ['nombre','descripcion','precio']
