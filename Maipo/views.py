@@ -38,3 +38,26 @@ def añadirProducto(request):
             formulario.save()
             data['mensaje'] = "Producto almacenado"
     return render(request, 'añadir_producto.html',data )
+
+
+def modificarProducto(request, id):
+    producto = Producto.objects.get(id=id)
+    data = {
+        'form': ProductoForm(instance=producto)
+    }
+
+    if request.method == 'POST':
+        formulario = ProductoForm(data = request.POST, instance=producto)
+        if formulario.is_valid():
+            formulario.save()
+            data['mensaje'] = "Producto modificado"
+            data['form'] = formulario
+    return render(request, 'modificar_producto.html', data )
+
+
+def eliminarProducto(request, id):
+
+    producto = Producto.objects.get(id=id)
+    producto.delete()
+
+    return redirect(to='lista_productos')
