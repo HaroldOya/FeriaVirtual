@@ -17,9 +17,12 @@ body{
 
 .formulario{
     width: 100%;
-    background: rgb(0, 0, 0,0.7);
-    margin-top: 150px;
-    padding: 3px;
+    height: 100%;
+    background:rgb(132, 199, 135);
+    padding-top: 20px;
+    padding-left: 30px;
+    padding-right: 50px;
+    padding-bottom: 20px;
     box-shadow: inset 0 0 0 3px gray;
     
 }
@@ -117,8 +120,9 @@ p{
     .formulario{
         margin: auto;
         width: 500px;
-        margin-top: 150px;
-        border-radius: 2%; 
+        border-radius: 2%;
+        margin-top: 20px; 
+        margin-bottom: 100px;
     }
 }
 
@@ -176,7 +180,6 @@ footer{
     width: 100%;
     padding: 10px 10px;
     display: flex;
-    
 }
 
 .redes{
@@ -184,3 +187,17 @@ footer{
     margin-top: 1%;
     float: right;
 }
+
+.titulo{
+    text-align: center;
+    width: 100%;
+    padding-top: 30px;
+    padding-bottom: 20px;
+}
+
+.botones{
+    text-align: center;
+    padding-top: 20px;
+}
+
+
