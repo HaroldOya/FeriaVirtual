@@ -61,3 +61,14 @@ def eliminarProducto(request, id):
     producto.delete()
 
     return redirect(to='lista_productos')
+
+def register(request):
+    form = UserCreationForm()
+    if request.method == "POST":
+        form = UserCreationForm(data=request.POST)
+        if form.is_valid():
+            user = form.save()
+            if user is not None:
+                do_login(request, user)
+                return redirect('/')
+    return render(request, "registration/registro.html", {'form': form})

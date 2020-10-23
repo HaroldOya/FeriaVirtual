@@ -25,7 +25,7 @@
             <a href="{% url 'añadir_producto' %}">Añadir Producto</a>
             {% endif %}
             <a href="{% url 'lista_productos' %}">Productos</a>
-            <a href="">Registrarse</a>
+            <a href="{% url 'registro' %}">Registrarse</a>
             <a href="{% url 'login' %}">Inicio Sesión</a>
             <br>
             {% if user.is_authenticated %}
