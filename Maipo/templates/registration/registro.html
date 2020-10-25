@@ -4,12 +4,26 @@
 
 <main>
 
+	<div class="container col-md-6" style="color:#FFFF;">
+		<form method="POST">
+			<div align="justify">
+				{% csrf_token %}
+       			{{ form.as_p }}
+			</div>
+			<div align="center">
+				<button type="submit" class="btn btn-info col-md-4">Registrar</button>
+			</div>
+
+    </form>
+	</div>
+
+<!--
     <form method="POST">
         {% csrf_token %}
         {{ form.as_p }}
     <button type="submit">Registrar</button>
     </form>
-
+-->
 
 
 

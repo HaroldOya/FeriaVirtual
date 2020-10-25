@@ -19,14 +19,14 @@
 <body background="{% static 'img/fondo1.jpg' %}" >
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
-                <header> 
+            <div class="col-lg-12">
+                <header class="col-lg-12"> 
                     <a href="{% url 'index' %}"><img src="{% static 'img/ferialogo100.png' %}" alt="logo feria"></a>
                     <div class="ti">Feria Virtual</div> 
                 </header>
             </div>
         </div>
-            <nav>
+            <nav class="col-lg-12">
                 <div id="mySidenav" class="sidenav">
                         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
                         <a href="{% url 'index' %}">Inicio</a>
@@ -56,7 +56,7 @@
                                     <a href="mailto:feriavirtual@duoc.cl">
                                         feriavirtual@duoc.cl
                                     </a>
-                                </td
+                                </td>
                             <br>
                             <td>Teléfono</td>
                                 <td>

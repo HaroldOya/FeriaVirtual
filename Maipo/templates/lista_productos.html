@@ -2,29 +2,27 @@
 {% load static %}
 {% block content %}
 
-
-  <table>
-    <tr>
-      <th>Nombre: </th>
-      <th>Descripcion: </th>
-      <th>Precio: </th>
-      <th>Opciones: </th>
-    </tr>
-
-    {% for p in productos %}
-    <tr>
-        <td>{{p.nombre}}</td>
-        <td>{{p.descripcion}}</td>
-        <td>{{p.precio}}</td>
-        <td><a href="{% url 'modificar_producto' p.id %}">Modificar</a> 
-            <a href="{% url 'eliminar_producto' p.id %} " onclick="return confirm('¿Estás seguro de querer eliminar este dato?')" >Eliminar</a>
-        </td>
-    </tr>
-    
-    {% endfor %}
-
-  </table>
-
-
+  <div class="color1 container">
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <tr class="info" bgcolor="#CBFFC5">
+          <th>Nombre: </th>
+          <th>Descripcion: </th>
+          <th>Precio: </th>
+          <th>Opciones: </th>
+        </tr>
+        {% for p in productos %}
+        <tr bgcolor="white">
+            <td>{{p.nombre}}</td>
+            <td>{{p.descripcion}}</td>
+            <td>{{p.precio}}</td>
+            <td><a href="{% url 'modificar_producto' p.id %}">Modificar</a> 
+                <a href="{% url 'eliminar_producto' p.id %} " onclick="return confirm('¿Estás seguro de querer eliminar este dato?')" >Eliminar</a>
+            </td>
+        </tr>
+        {% endfor %}
+        </table>
+    </div>
+  </div>
 
 {% endblock %}
