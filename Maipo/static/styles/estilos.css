@@ -1,5 +1,8 @@
 body{
-    font-family: arial;
+    display:flex; 	
+    flex-wrap: wrap;	
+    font-family: arial;	    
+    margin:0;
 
 }
 

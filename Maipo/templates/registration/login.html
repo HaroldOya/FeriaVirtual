@@ -2,19 +2,40 @@
 {% load static %}
 {% block content %}
 
+
 <main>
-    <h2 class="titulo">Login</h2>
-        <div class="form-login">
-            <form action="" method="POST"> 
-                {% csrf_token %}
-            <table>
-                {{form.as_table}}
-            </table>
-                <div class="botones">
-                    <input type="submit" value="Login">
-                </div>
-            </form>
-        </div>
+
+    <form action= "" method="POST" class="formulario">
+        <center>    
+                <h1>Login</h1>
+                <h2 style="color: white">Iniciar sesión</h2>
+            <div style="color:white">
+                <form method="POST" style="color: white"> 
+                    {{ form.as_p }}
+                    {% csrf_token %}
+                    <button class="button" type="submit">Login</button>
+                    <hr />
+                    <br>
+
+                            <a class="button" href="{% url 'registro' %}">Registrar usuario</a>
+                            <br><br>
+        </center>
+
+                </form>
+            
+            
+            
+            </div>
+    </form>
+
+
+
+
+
+
+
+
+
 </main>
 
 

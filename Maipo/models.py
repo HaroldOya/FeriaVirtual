@@ -16,7 +16,7 @@ class Productor (models.Model):
 
 class Producto (models.Model): 
     nombre = models.CharField(max_length=15)
-    descripcion = models.TextField()
+    descripcion = models.CharField(max_length=100)
     precio = models.IntegerField()
 
     def __str__(self):

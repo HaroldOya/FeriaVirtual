@@ -16,9 +16,13 @@
             <td>{{p.nombre}}</td>
             <td>{{p.descripcion}}</td>
             <td>{{p.precio}}</td>
+
+            {% if user.is_authenticated %}
             <td><a href="{% url 'modificar_producto' p.id %}">Modificar</a> 
                 <a href="{% url 'eliminar_producto' p.id %} " onclick="return confirm('¿Estás seguro de querer eliminar este dato?')" >Eliminar</a>
             </td>
+            {% endif %}
+
         </tr>
         {% endfor %}
         </table>

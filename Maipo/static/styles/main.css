@@ -7,7 +7,7 @@ body{
     flex-wrap: wrap;
     width: 100%;
     font-family: Arial, Helvetica, sans-serif;
-    margin: 500px;
+    margin: 0px;
 }
 
 img,embed,object,video{
@@ -15,6 +15,7 @@ img,embed,object,video{
 }
 *{
  padding: 0px;
+ margin: 0px;
  box-sizing: border-box black;
 }
 @font-face{
@@ -44,7 +45,7 @@ nav{
 }
 
 body{
-	width: 100%;
+	width: 80%;
 	margin-left: 10%;
     background-color: black;
     box-shadow: 0 20px 40px 0 black;
