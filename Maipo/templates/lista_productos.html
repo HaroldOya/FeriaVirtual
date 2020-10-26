@@ -2,10 +2,19 @@
 {% load static %}
 {% block content %}
 
-  <div class="color1 container">
-    <div class="table-responsive">
-      <table class="table table-bordered">
-        <tr class="info" bgcolor="#CBFFC5">
+	<style type="text/css">
+		table, th, td {
+			border: 1px solid black;
+			border-collapse: collapse;
+		}
+
+		th , td {
+			padding: 10px;
+		}
+
+	</style>
+      <table style="width: 100%">
+        <tr bgcolor="#CBFFC5">
           <th>Nombre: </th>
           <th>Descripcion: </th>
           <th>Precio: </th>
@@ -18,15 +27,16 @@
             <td>{{p.precio}}</td>
 
             {% if user.is_authenticated %}
-            <td><a href="{% url 'modificar_producto' p.id %}">Modificar</a> 
-                <a href="{% url 'eliminar_producto' p.id %} " onclick="return confirm('¿Estás seguro de querer eliminar este dato?')" >Eliminar</a>
+            <td style="text-align: center">
+            	<a href="{% url 'modificar_producto' p.id %}">Modificar</a> 
+                <a href="{% url 'eliminar_producto' p.id %} " onclick="return confirm('¿Estás seguro de querer eliminar este dato?')">Eliminar</a>
             </td>
             {% endif %}
 
         </tr>
         {% endfor %}
         </table>
-    </div>
-  </div>
+    
+  
 
 {% endblock %}

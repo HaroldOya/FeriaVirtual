@@ -1,7 +1,13 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-
+<style type="text/css">
+        .boton{
+            padding: 2%;
+            color: black;
+            background-color: #FFFF;
+        }
+</style>
 <main>
     <div class="titulo">
         <h2>Añadir nuevo producto</h2>
@@ -12,8 +18,8 @@
             {% csrf_token %}
             {{ form.as_p }}
             <div class="botones">
-                <input type="submit" value="Enviar">
-                <input type="reset" value="Borrar">
+                <input class="boton" type="submit" value="Enviar">
+                <input class="boton" type="reset" value="Borrar">
             </div>
             {{mensaje}}
         </form>    
