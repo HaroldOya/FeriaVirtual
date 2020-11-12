@@ -30,8 +30,7 @@ ALLOWED_HOSTS = ['127.0.0.1','.pythonanywhere.com' ]
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
-SOCIAL_AUTH_FACEBOOK_KEY = '4091929380852846'
-SOCIAL_AUTH_FACEBOOK_SECRET = 'e5ff635e44be49f371f8584cf97784d6'
+
 
 
 
@@ -45,7 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Maipo.apps.MaipoConfig',
-    'social_django',
+
 ]
 
 MIDDLEWARE = [
@@ -56,7 +55,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'social_django.middleware.SocialAuthExceptionMiddleware',
+
 ]
 
 ROOT_URLCONF = 'Miferia.urls'
@@ -132,7 +131,3 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-AUTHENTICATION_BACKENDS = (
-'social_core.backends.facebook.FacebookOAuth2',
-'django.contrib.auth.backends.ModelBackend',
-)
