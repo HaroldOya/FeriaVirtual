@@ -25,7 +25,7 @@ SECRET_KEY = 'a%!y7h1aouki9^oxi5tukq76f@+^@7cfl#d0i4aa)h7$ot*o$b'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','.pythonanywhere.com']
+ALLOWED_HOSTS = ['127.0.0.1','.pythonanywhere.com', 'haroldoya.github.io/FeriaVirtual/']
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Maipo.apps.MaipoConfig',
+    'social_django',
 ]
 
 MIDDLEWARE = [
