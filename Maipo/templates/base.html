@@ -12,8 +12,9 @@
     <link rel="stylesheet" href="{% static 'styles/fontello.css' %}">
     <link rel="stylesheet" href="{% static 'styles/responsivo.css' %}">
     <link rel="stylesheet" href="{% static 'styles/menu.css' %}">
-    
-  
+    {% block head %}
+
+    {% endblock %} 
 </head>
 
 <body background="{% static 'img/fondo1.jpg' %}" >

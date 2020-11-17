@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="{% static 'styles/jquery.countdown.css' %}"> 
+    <script type="text/javascript" src="{% static 'js/contador/jquery.plugin.js' %}"></script> 
+    <script type="text/javascript" src="{% static 'js/contador/jquery.countdown.js' %}"></script>
+
+    <script>
+        $(function(){
+            $('#contador').countdown({until: new Date(2020,11-1,17), format: 'HMS', onExpiry: liftOff});
+        });         
+        
+        function liftOff() { 
+            alert('Una subasta a finalizado!'); 
+        } 
+
+    </script>
+{% endblock %} 
+
+
+
+
+{% block content %}
+    <main>
+        <h1>SUBASTAS</h1>
+        <table style="width: 100%">
+            <tr bgcolor="#CBFFC5">
+              <th>Codigo: </th>
+              <th>Productos: </th>
+              <th>Peso Neto: </th>
+              <th>Valor: </th>
+              <th>Apostar</th>
+              <th>Tiempo Restante</th>
+              <th>Vistas</th>
+            </tr>
+            {% for p in subasta %}
+            <tr bgcolor="white">
+                <td>{{p.codigo}}</td>
+                <td>{% for productos in p.productos.all %}
+                    <li>{{ productos }}</li>
+                    {% endfor %}
+                </td>
+                <td>{{p.pesoProductos}} KG</td>
+                <td>${{p.ultimaApuesta}}</td>
+                <td><a href="{% url 'subastaDetalle' p.id %}">Ingresar</a></td>
+                <td><div id="contador"></div></td>
+                <td style="text-align: center;">{{ p.vistas }}</td>
+            </tr>
+            {% endfor %}
+        </table> 
+    </main>
+
+{% endblock %}

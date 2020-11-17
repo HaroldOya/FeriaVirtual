@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="{% static 'styles/jquery.countdown.css' %}"> 
+    <script type="text/javascript" src="{% static 'js/contador/jquery.plugin.js' %}"></script> 
+    <script type="text/javascript" src="{% static 'js/contador/jquery.countdown.js' %}"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'styles/subasta.css' %}"> 
+    <script>
+        $(function(){
+            $('#contador').countdown({until: new Date(2020,11-1,14), format: 'HMS', onExpiry: liftOff});
+        });         
+        
+        function liftOff() { 
+            alert('Una subasta a finalizado!'); 
+        } 
+
+    </script>
+    
+{% endblock %} 
+
+{% block content %}
+<main>
+        <div class="titulo">
+            <h2>Detalle Subasta: {{subastaDatos.codigo}}</h2>
+        </div>
+        <table class="table">
+            <thead>
+              <tr>
+                <th class="table-light" scope="col">Productos:</th>
+                <td class="table-light">{{subastaDatos.productos}}</td>
+              </tr>
+            </thead>
+            <tbody>
+                <tr>
+                  <th class="table-light" scope="col">Peso Carga:</th>
+                  <td class="table-light">{{subastaDatos.pesoProductos}} KG</td>
+                </tr>
+                <tr>
+                  <th class="table-light" scope="col">Direccion de entrega:</th>
+                  <td class="table-light">{{subastaDatos.DireccionEntrega}}</td>
+                </tr>
+                <tr>
+                   <th class="table-light" scope="col">Valor Inicial:</th>
+                   <td class="table-light">${{subastaDatos.precioInicial}}</td>
+                </tr>
+                <tr>
+                    <th class="table-light" scope="col">Valor Ultima Apuesta:</th>
+                    <td class="table-light">${{subastaDatos.ultimaApuesta}}</td>
+                 </tr>
+            </tbody>
+          </table>
+          <div>
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalCenter">
+                Apostar
+              </button>
+            <button type="button" class="btn btn-secondary">Volver</button>
+          </div>
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Apuesta</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Ingrese su Apuesta <br>
+          *Recuerde el valor debe ser inferior al valor inicial y el ultimo apostado.
+          <form class="form" action="/subastaRealizada/{{ subastaDatos.id }}/" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="usr">Valor de su apuesta:</label>
+              <input type="int" name="apuesta" class="form-control" required>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Realizar Apuesta</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}

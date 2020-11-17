@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.utils import timezone
-from .models import Productor,Producto
+from .models import Productor,Producto,subasta
 from .forms import PostForm,ProductoForm
 from django.shortcuts import redirect
 from django.contrib.auth import logout as do_logout
@@ -8,7 +8,7 @@ from django.contrib.auth import authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login as do_login
 from django.contrib.auth.forms import UserCreationForm
-
+from django.contrib.auth.decorators import user_passes_test, login_required
 
 # Create your views here.
 
@@ -72,3 +72,27 @@ def register(request):
                 do_login(request, user)
                 return redirect('/')
     return render(request, "registration/registro.html", {'form': form})
+
+@login_required
+def mostrarSubasta(request):
+    subasta1 = subasta.objects.all()
+    data = {
+        'subasta': subasta1
+    }
+    return render(request, 'subasta.html',data)
+@login_required
+def subastaDetalle(request, subasta_id):
+    subasta1 = subasta.objects.get(id=subasta_id)
+    dato = {
+        'subastaDatos': subasta1
+    }
+    subasta1.vistas = subasta1.vistas + 1
+    subasta1.save()
+    return render(request, 'subasta_apuesta.html',dato)
+
+@login_required
+def guardarApuesta(request,subasta_id):
+    subasta1 = subasta.objects.get(id=subasta_id)
+    subasta1.ultimaApuesta = request.POST['apuesta']
+    subasta1.save()
+    return render(request, 'subastaRealizada.html')

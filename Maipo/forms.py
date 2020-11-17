@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from .models import Productor,Producto
+from .models import Productor,Producto, subasta
 
 class PostForm(forms.ModelForm):
 
@@ -23,3 +23,4 @@ class ProductoForm(ModelForm):
     class Meta:
         model = Producto
         fields = ['nombre','descripcion','precio']
+
