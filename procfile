@@ -1,1 +1,0 @@
-web: gunicorn Miferia.wsgi --log-file -
