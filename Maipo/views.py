@@ -97,6 +97,3 @@ def guardarApuesta(request,subasta_id):
     subasta1.save()
     return render(request, 'subastaRealizada.html')
 
-
-def export(request):
-    return render(request, 'export.html' )
