@@ -14,4 +14,5 @@ urlpatterns = [
     path('subasta',views.mostrarSubasta, name='subastas'),
     path('subasta_apuesta/<int:subasta_id>/',views.subastaDetalle, name='subastaDetalle'),
     path('subastaRealizada/<int:subasta_id>/',views.guardarApuesta, name='subastaGuardar')
+    path('politica/',views.export,name='politica'),
 ]
