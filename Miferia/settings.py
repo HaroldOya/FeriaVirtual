@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'Maipo.apps.MaipoConfig',
+    'crispy_forms',
+    'Maipo',
 
 ]
 
@@ -85,18 +86,12 @@ WSGI_APPLICATION = 'Miferia.wsgi.application'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
-   'default': {
-        'ENGINE': 'django.db.backends.oracle',
-        'NAME': 'database-1.czsqwm83nmvy.us-east-1.rds.amazonaws.com:1521/DATABASE',
-        'USER': 'admin',
-        'PASSWORD': 'portafolio',
-        'TEST': {
-            'USER': 'default_test',
-            'TBLSPACE': 'default_test_tbls',
-            'TBLSPACE_TMP': 'default_test_tbls_tmp',
-        }
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
 
 
 # Password validation
@@ -138,7 +133,4 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-<<<<<<< HEAD
-#AUTH_USER_MODEL = 'Maipo.User'
-=======
->>>>>>> 2a5e166e69eb6cf089acb67598b0538262f69457
+AUTH_USER_MODEL = 'Maipo.User'

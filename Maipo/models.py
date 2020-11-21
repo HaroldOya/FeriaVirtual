@@ -1,5 +1,7 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
-# from django.contrib.auth.models import AbstractUser
+
+
 # Create your models here.
 # class Role(models.Model):
 
@@ -25,15 +27,18 @@ from django.db import models
 # class User(AbstractUser):
 #   roles = models.ManyToManyField(Role)
 
-
-
-
-
+class User(AbstractUser):
+    is_clienteExterno = models.BooleanField(default=False)
+    is_clienteInterno = models.BooleanField(default=False)
+    is_productor = models.BooleanField(default=False)
+    is_transportista = models.BooleanField(default=False)
+    is_consultor = models.BooleanField(default=False)
 
 
 class Productor (models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     nombre = models.CharField(max_length=60)
-    correo = models.CharField(max_length=100)
+    correo = models.EmailField(max_length=254)
     rut = models.CharField(max_length=10)
     edad = models.CharField(max_length=3)
     telefono = models.CharField(max_length=10)
@@ -48,14 +53,17 @@ class Producto (models.Model):
     nombre = models.CharField(max_length=15)
     descripcion = models.CharField(max_length=100)
     precio = models.IntegerField()
-    Productor = models.ManyToManyField('Productor', blank=True, null=True )
+    Productor = models.ForeignKey(Productor,on_delete=models.PROTECT, blank=True, null=True )
 
     def __str__(self):
         return self.nombre
 
 class Transportista (models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     nombre  = models.CharField(max_length=60)
+    correo = models.EmailField(max_length=254)
     rut = models.CharField(max_length=10)
+    telefono = models.IntegerField()
     peso_max_camion = models.IntegerField(default=12)
     peso_min_camion = models.IntegerField(default=12)
     matricula = models.CharField(max_length=6, default="AAAAAA")
@@ -66,6 +74,7 @@ class Transportista (models.Model):
         return self.nombre
 
 class clienteExterno (models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     nombre = models.CharField(max_length=60)
     rut = models.CharField(max_length=10)
     pais = models.CharField(max_length=15)
@@ -78,6 +87,7 @@ class clienteExterno (models.Model):
         return self.pais
 
 class clienteLocal (models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     nombre = models.CharField(max_length=60)
     rut = models.CharField(max_length=10)
     region = models.CharField(max_length=40)
@@ -94,8 +104,10 @@ class subasta (models.Model):
     ultimaApuesta = models.IntegerField(null=True)
     pesoProductos = models.IntegerField()
     vistas = models.IntegerField()
-    ultimoEditor = models.ForeignKey(Transportista, on_delete=models.CASCADE, null=True, blank=True)
-    DireccionEntrega = models.CharField(max_length=50, default='Contactar Productor')
+    ultimoEditor = models.ForeignKey(User, on_delete=models.SET(User), null=True, blank=True)
+    direccionEntrega = models.CharField(max_length=50, default='Contactar Productor')
+    fechaInicio = models.DateField(auto_now=True, auto_now_add=False)
+    fechaTermino = models.DateField(auto_now=False, auto_now_add=False)
 
     def __str__(self):
         return self.codigo

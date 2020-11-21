@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.utils import timezone
-from .models import Productor,Producto,subasta
-from .forms import PostForm,ProductoForm
+from django.contrib.auth import login
+from .models import Productor,Producto,subasta, User
+from .forms import ProductoForm, ProductorLoginForm, TransportistaLoginForm
 from django.shortcuts import redirect
 from django.contrib.auth import logout as do_logout
 from django.contrib.auth import authenticate
@@ -9,11 +10,44 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login as do_login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import user_passes_test, login_required
+from django.views.generic import CreateView, ListView, UpdateView
 
 # Create your views here.
 
 def index(request):
     return render(request, 'index.html' )
+
+def registrosAdmin(request):
+    return render(request, 'registration/registros.html')
+
+class ProductorRegistro(CreateView):
+    model = User
+    form_class = ProductorLoginForm
+    template_name = 'registration/registro_productor.html'
+
+    def get_context_data(self, **kwargs):
+        kwargs['user_type'] = 'productor'
+        return super().get_context_data(**kwargs)
+
+    def form_valid(self, form):
+        user = form.save()
+        login(self.request, user)
+        return redirect('/')
+
+class TransportistaRegistro(CreateView):
+    model = User
+    form_class = TransportistaLoginForm
+    template_name = 'registration/registro_transportista.html'
+
+    def get_context_data(self, **kwargs):
+        kwargs['user_type'] = 'transportista'
+        return super().get_context_data(**kwargs)
+
+    def form_valid(self, form):
+        user = form.save()
+        login(self.request, user)
+        return redirect('/')
+
 
 
 def galeria(request):
@@ -62,16 +96,16 @@ def eliminarProducto(request, id):
 
     return redirect(to='lista_productos')
 
-def register(request):
-    form = UserCreationForm()
-    if request.method == "POST":
-        form = UserCreationForm(data=request.POST)
-        if form.is_valid():
-            user = form.save()
-            if user is not None:
-                do_login(request, user)
-                return redirect('/')
-    return render(request, "registration/registro.html", {'form': form})
+# def register(request):
+#     form = UserCreationForm()
+#     if request.method == "POST":
+#         form = UserCreationForm(data=request.POST)
+#         if form.is_valid():
+#             user = form.save()
+#             if user is not None:
+#                 do_login(request, user)
+#                 return redirect('/')
+#     return render(request, "registration/registro.html", {'form': form})
 
 @login_required
 def mostrarSubasta(request):
@@ -92,7 +126,9 @@ def subastaDetalle(request, subasta_id):
 
 @login_required
 def guardarApuesta(request,subasta_id):
+    current_user = request.user
     subasta1 = subasta.objects.get(id=subasta_id)
     subasta1.ultimaApuesta = request.POST['apuesta']
+    subasta1.ultimoEditor = current_user
     subasta1.save()
     return render(request, 'subastaRealizada.html')

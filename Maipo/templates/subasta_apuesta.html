@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="{% static 'styles/subasta.css' %}"> 
     <script>
         $(function(){
-            $('#contador').countdown({until: new Date(2020,11-1,14), format: 'HMS', onExpiry: liftOff});
+            $('#contador').countdown({until: new Date( ano ), format: 'HMS', onExpiry: liftOff});
         });         
         
         function liftOff() { 
@@ -31,7 +31,11 @@
             <thead>
               <tr>
                 <th class="table-light" scope="col">Productos:</th>
-                <td class="table-light">{{subastaDatos.productos}}</td>
+                    <td class="table-light">{% for subastaDatos in subastaDatos.productos.all %}
+                      <li>{{ subastaDatos }}</li>
+                      {% endfor %}
+                    </td>
+                  
               </tr>
             </thead>
             <tbody>
@@ -41,7 +45,7 @@
                 </tr>
                 <tr>
                   <th class="table-light" scope="col">Direccion de entrega:</th>
-                  <td class="table-light">{{subastaDatos.DireccionEntrega}}</td>
+                  <td class="table-light">{{subastaDatos.direccionEntrega}}</td>
                 </tr>
                 <tr>
                    <th class="table-light" scope="col">Valor Inicial:</th>
@@ -51,6 +55,10 @@
                     <th class="table-light" scope="col">Valor Ultima Apuesta:</th>
                     <td class="table-light">${{subastaDatos.ultimaApuesta}}</td>
                  </tr>
+                 <tr>
+                  <th class="table-light" scope="col">Fecha Termino:</th>
+                  <td class="table-light">{{subastaDatos.fechaTermino}}</td>
+               </tr>
             </tbody>
           </table>
           <div>

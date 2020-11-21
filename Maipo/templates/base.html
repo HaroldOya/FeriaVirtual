@@ -28,11 +28,14 @@
                 <div id="mySidenav" class="sidenav">
                         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
                         <a href="{% url 'index' %}">Inicio</a>
-                        {% if user.is_authenticated %}
+                        {% if user.is_authenticated and user.is_productor %}
                         <a href="{% url 'añadir_producto' %}">Añadir Producto</a>
                         {% endif %}
+                        {% if user.is_transportista %}
+                            <a href="{% url 'subastas'%}">Subastas</a>
+                        {% endif %}
                         <a href="{% url 'lista_productos' %}">Productos</a>
-                        <a href="{% url 'registro' %}">Registrarse</a>
+                        <a href="{% url 'registros' %}">Registrarse</a>
                         <a href="{% url 'login' %}">Inicio Sesión</a>
                         <br>
                         {% if user.is_authenticated %}
