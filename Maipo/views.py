@@ -132,3 +132,4 @@ def guardarApuesta(request,subasta_id):
     subasta1.ultimoEditor = current_user
     subasta1.save()
     return render(request, 'subastaRealizada.html')
+

@@ -25,7 +25,7 @@ SECRET_KEY = 'a%!y7h1aouki9^oxi5tukq76f@+^@7cfl#d0i4aa)h7$ot*o$b'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','.pythonanywhere.com' ]
+ALLOWED_HOSTS = ['127.0.0.1','.pythonanywhere.com',  ]
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
@@ -43,9 +43,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+<<<<<<< HEAD
     'crispy_forms',
     'Maipo',
 
+=======
+    'Maipo.apps.MaipoConfig',
+>>>>>>> c4adb5265508418698ff1bc19fd3ab127954e773
 ]
 
 MIDDLEWARE = [
@@ -56,6 +60,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
 
 ]
 
@@ -72,8 +77,6 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'social_django.context_processors.backends',
-                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -133,4 +136,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
+<<<<<<< HEAD
 AUTH_USER_MODEL = 'Maipo.User'
+=======
+#AUTH_USER_MODEL = 'Maipo.User'
+>>>>>>> c4adb5265508418698ff1bc19fd3ab127954e773
