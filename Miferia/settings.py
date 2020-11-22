@@ -43,13 +43,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-<<<<<<< HEAD
     'crispy_forms',
     'Maipo',
 
-=======
-    'Maipo.apps.MaipoConfig',
->>>>>>> c4adb5265508418698ff1bc19fd3ab127954e773
 ]
 
 MIDDLEWARE = [
