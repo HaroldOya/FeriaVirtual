@@ -43,13 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-<<<<<<< HEAD
     'crispy_forms',
     'Maipo',
-
-=======
-    'Maipo.apps.MaipoConfig',
->>>>>>> c4adb5265508418698ff1bc19fd3ab127954e773
 ]
 
 MIDDLEWARE = [
@@ -136,8 +131,4 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-<<<<<<< HEAD
 AUTH_USER_MODEL = 'Maipo.User'
-=======
-#AUTH_USER_MODEL = 'Maipo.User'
->>>>>>> c4adb5265508418698ff1bc19fd3ab127954e773
