@@ -52,7 +52,7 @@ class Productor (models.Model):
 class Producto (models.Model): 
     descripcion = models.CharField(max_length=100)
     name = models.CharField(max_length=255)
-    image = models.ImageField(upload_to='.\static\img\products')
+    image = models.ImageField(upload_to='Maipo\media')
     price = models.FloatField()
     Productor = models.ForeignKey(Productor,on_delete=models.PROTECT, blank=True, null=True )
 
