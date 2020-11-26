@@ -22,7 +22,7 @@
 	</style>
         <main>
           <div class="formulario">
-            {% if user.is_autheticated and user.is_superuser %}
+            {% if user.is_superuser %}
               <h2>Bienvenido Administrador</h2>
               <h4>Seleccione el tipo de usuario que desea crear</h4>
                 <a href="{% url 'registro_productor' %}" class="btn btn-primary btn-lg" role="button">Registrar Productor</a>
