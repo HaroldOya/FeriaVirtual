@@ -146,7 +146,7 @@ CART_SESSION_ID = 'cart'
 if (len(sys.argv) >= 2 and sys.argv[1] == 'runserver'):
     BRAINTREE_PRODUCTION = False
 else:
-    BRAINTREE_PRODUCTION = True
+    BRAINTREE_PRODUCTION = False
 BRAINTREE_MERCHANT_ID = 'w8k375dgk7mtdh82'
 BRAINTREE_PUBLIC_KEY = 'ccfnsbprhtrqbm62'
 BRAINTREE_PRIVATE_KEY = '6ba815b7d7ad01b8a1347106286be943'
