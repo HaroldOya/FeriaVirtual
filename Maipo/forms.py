@@ -86,5 +86,11 @@ class ProductoForm(ModelForm):
 
     class Meta:
         model = Producto
-        fields = ['nombre','descripcion','precio']
+        labels = {"price": "Precio","descripcion":"Descripcion","name":"Nombre", "image":"Imagen"}
+        fields = ['name','descripcion','price','image']
+
+    
+
+    
+        
 

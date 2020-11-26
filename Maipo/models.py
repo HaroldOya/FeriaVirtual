@@ -43,20 +43,21 @@ class Productor (models.Model):
     edad = models.CharField(max_length=3)
     telefono = models.CharField(max_length=10)
     genero = models.CharField(max_length=10)
-    direccion = models.CharField(max_length=10)
+    direccion = models.CharField(max_length=500)
     nacionalidad = models.CharField(max_length=30)
 
     def __str__(self):
         return self.nombre
 
 class Producto (models.Model): 
-    nombre = models.CharField(max_length=15)
     descripcion = models.CharField(max_length=100)
-    precio = models.IntegerField()
+    name = models.CharField(max_length=255)
+    image = models.ImageField(upload_to='.\static\img\products')
+    price = models.FloatField()
     Productor = models.ForeignKey(Productor,on_delete=models.PROTECT, blank=True, null=True )
 
     def __str__(self):
-        return self.nombre
+        return self.name
 
 class Transportista (models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
