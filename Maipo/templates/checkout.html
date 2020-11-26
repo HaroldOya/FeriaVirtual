@@ -6,7 +6,6 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="{% static 'styles/font-awesome.min.css' %}">
   <link rel="stylesheet" href="{% static 'styles/subasta.css' %}">
-  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
   <script src="https://js.braintreegateway.com/web/dropin/1.18.0/js/dropin.min.js"></script> 
 {% endblock %}
 {% block content %}
@@ -47,7 +46,7 @@
                                 'price':'{{ cart_total_amount|floatformat }}'}
                 }).done(function (result) {
                     alert("Pago Realizado Con Exito!");
-                    window.location.href = "http://127.0.0.1:8000/";
+                    window.location.href = "https://feriavirtualmaipo.pythonanywhere.com/";
                 });
             });
         });
