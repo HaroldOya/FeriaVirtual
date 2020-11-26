@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'crispy_forms',
     'Maipo',
+    'cart',
     ]
     
 MIDDLEWARE = [
@@ -70,6 +71,7 @@ TEMPLATES = [
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
+                'cart.context_processor.cart_total_amount',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
@@ -131,4 +133,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
+MEDIA_ROOT = (BASE_DIR)
+MEDIA_URL = '/media/'
+
 AUTH_USER_MODEL = 'Maipo.User'
+
+CART_SESSION_ID = 'cart'

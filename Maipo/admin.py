@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import Productor,Producto,Transportista,clienteExterno,clienteLocal,subasta
 
 class ProductoAdmin(admin.ModelAdmin):
-    list_display = ['nombre', 'descripcion', 'precio']
+    list_display = ['name', 'descripcion', 'price']
 
 
 admin.site.register(Productor)

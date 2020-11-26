@@ -29,7 +29,8 @@
                         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
                         <a href="{% url 'index' %}">Inicio</a>
                         {% if user.is_authenticated and user.is_productor %}
-                        <a href="{% url 'añadir_producto' %}">Añadir Producto</a>
+                            <a href="{% url 'añadir_producto' %}">Añadir Producto</a>
+                            <a href="{% url 'mis_productos' %}">Mis Productos</a>
                         {% endif %}
                         {% if user.is_transportista %}
                             <a href="{% url 'subastas'%}">Subastas</a>
@@ -39,6 +40,7 @@
                         <a href="{% url 'login' %}">Inicio Sesión</a>
                         <br>
                         {% if user.is_authenticated %}
+                        <a href="{% url 'cart_detail' %}">Carro de compras</a>
                         <a href="#">Usuario: {{ user.username }}</a>
                         <a href="{% url 'logout' %}">Cerrar Sesión</a>
                         {% endif %}
