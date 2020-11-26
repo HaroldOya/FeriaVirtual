@@ -1,6 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-
+from django_countries.fields import CountryField
 
 # Create your models here.
 # class Role(models.Model):
@@ -44,7 +44,7 @@ class Productor (models.Model):
     telefono = models.CharField(max_length=10)
     genero = models.CharField(max_length=10)
     direccion = models.CharField(max_length=500)
-    nacionalidad = models.CharField(max_length=30)
+    nacionalidad = CountryField()
 
     def __str__(self):
         return self.nombre
@@ -77,11 +77,12 @@ class Transportista (models.Model):
 class clienteExterno (models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     nombre = models.CharField(max_length=60)
-    rut = models.CharField(max_length=10)
-    pais = models.CharField(max_length=15)
+    ID = models.CharField(max_length=10)
+    pais = CountryField()
     region = models.CharField(max_length=40)
     ciudad = models.CharField(max_length=60)
     codigopostal = models.IntegerField()
+    correo = models.EmailField(max_length=254)
 
     def __str__(self):
         return self.nombre
@@ -91,8 +92,11 @@ class clienteLocal (models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     nombre = models.CharField(max_length=60)
     rut = models.CharField(max_length=10)
-    region = models.CharField(max_length=40)
-    ciudad = models.CharField(max_length=60)
+    regiones = models.CharField(max_length=40)
+    comuna = models.CharField(max_length=60,default="Maipu")
+    codigopostal = models.IntegerField()
+    correo = models.EmailField(max_length=254)
+    telefono = models.IntegerField()
 
     def __str__(self):
         return self.nombre
@@ -106,11 +110,21 @@ class subasta (models.Model):
     pesoProductos = models.IntegerField()
     vistas = models.IntegerField()
     ultimoEditor = models.ForeignKey(User, on_delete=models.SET(User), null=True, blank=True)
-    direccionEntrega = models.CharField(max_length=50, default='Contactar Productor')
+    direccionEntrega = models.CharField(max_length=50, default='Contactar Client')
+    VENTAS = (('Venta Interna','Venta Interna'),('Venta Externa', 'Venta Externa'))
+    tipoDeVenta = models.CharField(max_length=13,choices=VENTAS, default="Venta Interna")
     fechaInicio = models.DateField(auto_now=True, auto_now_add=False)
     fechaTermino = models.DateField(auto_now=False, auto_now_add=False)
 
     def __str__(self):
         return self.codigo
-    
-    
+
+class Pedidos (models.Model):
+    cliente = models.ForeignKey(User, on_delete=models.CASCADE)
+    pagoRealizado = models.BooleanField(default=False)
+    valor_Total = models.FloatField()
+    transportista = models.ForeignKey(Transportista, on_delete=models.PROTECT, null=True)
+    productos = models.ManyToManyField(Producto)
+    productor = models.ForeignKey(Productor, on_delete=models.PROTECT)
+    ESTADOS = (('Pagado','Pagado'),('En_Subasta','En Subasta'),('En_Camino','En Camino'),('Finalizado','Finalizado'))
+    estadoDelPedido = models.CharField(max_length=30,choices=ESTADOS, default="Pagado")

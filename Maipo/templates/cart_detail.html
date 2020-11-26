@@ -24,7 +24,7 @@
     <tr>
       <td>{{value.name}}</td>
       <td><a href="{% url 'item_decrement' value.product_id %}"><i class="fa fa-minus" aria-hidden="true"></i></a>{{value.quantity}}<a href="{% url 'item_increment' value.product_id %}"><i class="fa fa-plus" aria-hidden="true"></i></a></td>
-      <td>{{value.price}}</td>
+      <td>{{value.price|floatformat}}</td>
       <td>Total: {{ value.price|multiply:value.quantity }}</td> 
     </tr>
     {% endfor %}
@@ -33,8 +33,14 @@
       <td></td>
       <td></td>
       <td>
-        Total: {{ cart_total_amount }}
+        Total: {{ cart_total_amount|floatformat }}
       </td>
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td><a class="btn btn-warning" href="{% url 'checkout' %}">Realizar Pago</a></td>
     </tr>
   </tbody>
 </table>

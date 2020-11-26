@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.utils import timezone
 from django.contrib.auth import login
-from .models import Productor,Producto,subasta, User
-from .forms import ProductorLoginForm, TransportistaLoginForm, ProductoForm
+from .models import Productor,Producto,subasta, User, clienteLocal, clienteExterno
+from .forms import ProductorLoginForm, TransportistaLoginForm, ProductoForm, ClienteExternoLoginForm, ClienteInternoLoginForm
 from django.shortcuts import redirect
 from django.contrib.auth import logout as do_logout
 from django.contrib.auth import authenticate
@@ -13,6 +13,8 @@ from django.contrib.auth.decorators import user_passes_test, login_required
 from django.views.generic import CreateView, ListView, UpdateView
 from cart.cart import Cart
 from django.http import HttpResponse
+from django.conf import settings
+import braintree
 
 # Create your views here.
 
@@ -50,7 +52,33 @@ class TransportistaRegistro(CreateView):
         login(self.request, user)
         return redirect('/')
 
+class ClienteInternoRegistro(CreateView):
+    model = User
+    form_class = ClienteInternoLoginForm
+    template_name = 'registration/registrar_clienteInt.html'
 
+    def get_context_data(self, **kwargs):
+        kwargs['user_type'] = 'clienteInterno'
+        return super().get_context_data(**kwargs)
+
+    def form_valid(self, form):
+        user = form.save()
+        login(self.request, user)
+        return redirect('/')
+
+class ClienteExternoRegistro(CreateView):
+    model = User
+    form_class = ClienteExternoLoginForm
+    template_name = 'registration/registrar_clienteEx.html'
+
+    def get_context_data(self, **kwargs):
+        kwargs['user_type'] = 'clienteExterno'
+        return super().get_context_data(**kwargs)
+
+    def form_valid(self, form):
+        user = form.save()
+        login(self.request, user)
+        return redirect('/')
 
 def galeria(request):
     return render(request, 'templates/galeria.html' )
@@ -204,3 +232,52 @@ def cart_clear(request):
 @login_required
 def cart_detail(request):
     return render(request, 'cart_detail.html')
+
+
+# Metodos de pago
+
+@login_required
+def checkout_page(request):
+    #generate all other required data that you may need on the #checkout page and add them to context.
+    current_user = request.user
+
+    if settings.BRAINTREE_PRODUCTION:
+        braintree_env = braintree.Environment.Production
+    else:
+        braintree_env = braintree.Environment.Sandbox
+
+    # Configure Braintree
+    braintree.Configuration.configure(
+        braintree_env,
+        merchant_id=settings.BRAINTREE_MERCHANT_ID,
+        public_key=settings.BRAINTREE_PUBLIC_KEY,
+        private_key=settings.BRAINTREE_PRIVATE_KEY,
+    )
+ 
+    try:
+        braintree_client_token = braintree.ClientToken.generate({ "customer_id": User.id })
+    except:
+        braintree_client_token = braintree.ClientToken.generate({})
+
+    context = {'braintree_client_token': braintree_client_token}
+    return render(request, 'checkout.html', context)
+
+@login_required
+def payment(request):
+    price = request.POST['price']
+    nonce_from_the_client = request.POST['paymentMethodNonce']
+    customer_kwargs = {
+        "first_name": request.user.username,
+        "last_name": request.user.last_name,
+        "email": request.user.email,
+    }
+    customer_create = braintree.Customer.create(customer_kwargs)
+    customer_id = customer_create.customer.id
+    result = braintree.Transaction.sale({
+        "amount": price,
+        "payment_method_nonce": nonce_from_the_client,
+        "options": {
+            "submit_for_settlement": True
+        }
+    })
+    return HttpResponse('Pago Realizado')

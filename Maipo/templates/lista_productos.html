@@ -49,7 +49,7 @@
         </table> -->
         <main>
           <section class="text-center mb-4">
-
+          {% if productos %}
             <div class="row wow fadeIn">
             {% for p in productos %}
             <div class="col-lg-3 col-md-6 mb-4">
@@ -89,6 +89,10 @@
 
             </div>
             {% endfor %}
+            {% else %}
+          </section>
+            <h2 style="text-align: center; color: white;">Aun no hay productos registrados</h2>     
+            {% endif %}
           </div>
 
         </section>

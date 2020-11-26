@@ -2,8 +2,11 @@ from django import forms
 from django.forms import ModelForm
 from django.db import transaction
 from django.contrib.auth.forms import UserCreationForm
-from .models import Productor,Producto, subasta, User, Transportista
+from .models import Productor,Producto, subasta, User, Transportista, clienteLocal, clienteExterno
 from django.core.validators import MaxValueValidator
+from django_countries.widgets import CountrySelectWidget
+from django_countries.fields import CountryField
+from localflavor.cl.forms import CLRegionSelect, CLRutField
 
 # class PostForm(forms.ModelForm):
 
@@ -21,6 +24,31 @@ from django.core.validators import MaxValueValidator
 #             'nacionalidad': forms.TextInput(attrs={'class':'Form'}),            
 #         }
 
+class ClienteInternoLoginForm(UserCreationForm):
+    
+    nombre = forms.CharField(label="Nombre",max_length=100, required=True)
+    correo = forms.EmailField(label="Correo Electronico", required=True)
+    rut = CLRutField()
+    telefono = forms.IntegerField(validators=[MaxValueValidator(999999999)], required=True)
+    REGION_CHOICES = (('RM', 'Región Metropolitana de Santiago'), ('I', 'Región de Tarapacá'), ('II', 'Región de Antofagasta'), ('III', 'Región de Atacama'), ('IV', 'Región de Coquimbo'), ('V', 'Región de Valparaíso'), ('VI', 'Región del Libertador Bernardo O^Higgins'), ('VII', 'Región del Maule'), ('VIII', 'Región del Bío Bío'), ('IX', 'Región de la Araucanía'), ('X', 'Región de los Lagos'), ('XI', 'Región de Aysén del General Carlos Ibáñez del Campo'), ('XII', 'Región de Magallanes y la Antártica Chilena'), ('XIV', 'Región de Los Ríos'), ('XV', 'Región de Arica-Parinacota'))
+    regiones = forms.ChoiceField(choices=REGION_CHOICES)
+    comuna = forms.CharField(max_length=500, required=False)
+    codigopostal = forms.IntegerField(required=False)
+    
+    class Meta:
+        model = User
+        fields = ('username','nombre','correo','rut','telefono','regiones','comuna','codigopostal')
+        
+    @transaction.atomic
+    def save(self):
+        user = super(ClienteInternoLoginForm, self).save(commit=False)
+        user.is_clienteInterno = True
+        user.save()
+        clienteInterno = clienteLocal.objects.create(user=user, nombre = self.cleaned_data["nombre"],regiones = self.cleaned_data["regiones"], correo = self.cleaned_data["correo"], rut = self.cleaned_data["rut"],
+            telefono = self.cleaned_data["telefono"],comuna = self.cleaned_data["comuna"],codigopostal = self.cleaned_data["codigopostal"])
+        return user
+
+
 class ProductorLoginForm(UserCreationForm):
     
     nombre = forms.CharField(label="Nombre",max_length=100, required=True)
@@ -36,7 +64,7 @@ class ProductorLoginForm(UserCreationForm):
     ]
 
     genero = forms.CharField(widget=forms.Select(choices=GENEROS))
-    nacionalidad = forms.CharField(max_length=100, required=True)
+    nacionalidad = CountryField().formfield()
     direccion = forms.CharField(max_length=100, required=True)
 
     class Meta:
@@ -62,7 +90,7 @@ class TransportistaLoginForm(UserCreationForm):
     peso_max_camion = forms.IntegerField(required=True)
     peso_min_camion = forms.IntegerField(required=True)
     matricula = forms.CharField(max_length=6)
-    nacionalidad = forms.CharField(max_length=100, required=True)
+    nacionalidad = CountryField().formfield()
     VENTAS = (('Venta Interna','Venta Interna'),('Venta Externa', 'Venta Externa'))
     tipoDeVenta = forms.ChoiceField(choices=VENTAS)
 
@@ -81,6 +109,28 @@ class TransportistaLoginForm(UserCreationForm):
         return user
 
 
+class ClienteExternoLoginForm(UserCreationForm):
+    
+    nombre = forms.CharField(label="Nombre",max_length=100, required=True)
+    correo = forms.EmailField(label="Correo Electronico", required=True)
+    rut = forms.CharField(max_length=20)
+    telefono = forms.IntegerField(validators=[MaxValueValidator(999999999)], required=True)
+    region = forms.CharField(label="Region",max_length=100, required=True)
+    ciudad = forms.CharField(max_length=500, required=False)
+    codigopostal = forms.IntegerField(required=False)
+
+    class Meta:
+        model = User
+        fields = ('username','nombre','correo','rut','telefono','region','ciudad','codigopostal')
+
+    @transaction.atomic
+    def save(self):
+        user = super(ClienteExternoLoginForm, self).save(commit=False)
+        user.is_clienteExterno = True
+        user.save()
+        transportista = clienteExterno.objects.create(user=user, nombre = self.cleaned_data["nombre"], correo = self.cleaned_data["correo"], rut = self.cleaned_data["rut"],
+            telefono = self.cleaned_data["telefono"],region = self.cleaned_data["region"],ciudad = self.cleaned_data["ciudad"],codigopostal = self.cleaned_data["codigopostal"])
+        return user
 
 class ProductoForm(ModelForm):
 

@@ -32,10 +32,10 @@
             {% else %}
               <h2>Bienvenido Cliente</h2>
               <h4>Seleccione el tipo de cliente que es usted!</h4>
-                <a href="{% url 'registro_productor' %}" class="btn btn-primary btn-lg" role="button">Registrar Cliente Externo (Internacional)</a>
+                <a href="{% url 'registro_clienteExterno' %}" class="btn btn-primary btn-lg" role="button">Registrar Cliente Externo (Internacional)</a>
               <br>
               <br>
-                <a href="{% url 'registro_transportista' %}" class="btn btn-primary btn-lg" role="button">Registrar Cliente Interno (Nacional)</a>
+                <a href="{% url 'registro_clienteInterno' %}" class="btn btn-primary btn-lg" role="button">Registrar Cliente Interno (Nacional)</a>
             {% endif %}
         </main>
 

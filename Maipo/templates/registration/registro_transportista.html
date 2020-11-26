@@ -14,7 +14,7 @@
         <main>
           <div class="formulario">
             <div class="col-md-8 col-sm-10 col-12">
-              <h2>Sign up as a {{ user_type }}</h2>
+              <h2>Creando Registro como {{ user_type }}</h2>
               <form method="post" novalidate>
                 {% csrf_token %}
                 <input type="hidden" name="next" value="{{ next }}">

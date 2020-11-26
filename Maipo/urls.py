@@ -13,6 +13,8 @@ urlpatterns = [
     path('mis_productos',views.mostrarProductoPropios, name='mis_productos'),
     path('registros/',views.registrosAdmin,name='registros'),
     path('registros/productor',views.ProductorRegistro.as_view(),name='registro_productor'),
+    path('registros/clienteInterno',views.ClienteInternoRegistro.as_view(),name='registro_clienteInterno'),
+    path('registros/clienteExtenro',views.ClienteExternoRegistro.as_view(),name='registro_clienteExterno'),
     path('registros/transportista',views.TransportistaRegistro.as_view(),name='registro_transportista'),
     path('modificar_producto/<id>/',views.modificarProducto, name='modificar_producto'),
     path('eliminar_producto/<id>/',views.eliminarProducto, name='eliminar_producto'),
@@ -28,5 +30,6 @@ urlpatterns = [
          views.item_decrement, name='item_decrement'),
     path('cart/cart_clear/', views.cart_clear, name='cart_clear'),
     path('cart/cart-detail/',views.cart_detail,name='cart_detail'),
-    
+    path('checkout',views.checkout_page, name='checkout'),
+    path('payment',views.payment,name='payment')
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
