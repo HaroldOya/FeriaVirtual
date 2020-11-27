@@ -32,9 +32,9 @@
               <th>Productos: </th>
               <th>Peso Neto: </th>
               <th>Valor: </th>
-              <th>Apostar</th>
-              <th>Tiempo Restante</th>
+              <th>Fecha Termino</th>
               <th>Vistas</th>
+              <th>Apostar</th>
             </tr>
             {% for p in subasta %}
             <tr bgcolor="white">
@@ -45,9 +45,9 @@
                 </td>
                 <td>{{p.pesoProductos}} KG</td>
                 <td>${{p.ultimaApuesta}}</td>
-                <td><a href="{% url 'subastaDetalle' p.id %}">Ingresar</a></td>
-                <td><div id="contador"></div></td>
+                <td style="text-align: center;">{{ p.fechaTermino }}</td>
                 <td style="text-align: center;">{{ p.vistas }}</td>
+                <td><a href="{% url 'subastaDetalle' p.id %}">Ingresar</a></td>
             </tr>
             {% endfor %}
         </table> 
