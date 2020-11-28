@@ -114,7 +114,6 @@ class ClienteExternoLoginForm(UserCreationForm):
     nombre = forms.CharField(label="Nombre",max_length=100, required=True)
     correo = forms.EmailField(label="Correo Electronico", required=True)
     ID = forms.CharField(max_length=20)
-    telefono = forms.IntegerField(validators=[MaxValueValidator(999999999)], required=True)
     nacionalidad = CountryField().formfield()
     region = forms.CharField(label="Region",max_length=100, required=True)
     ciudad = forms.CharField(max_length=500, required=False)
@@ -130,7 +129,7 @@ class ClienteExternoLoginForm(UserCreationForm):
         user.is_clienteExterno = True
         user.save()
         clienteInternacional = clienteExterno.objects.create(user=user, nombre = self.cleaned_data["nombre"], correo = self.cleaned_data["correo"], ID = self.cleaned_data["ID"],
-            telefono = self.cleaned_data["telefono"],pais = self.cleaned_data['nacionalidad'],region = self.cleaned_data["region"],ciudad = self.cleaned_data["ciudad"],codigopostal = self.cleaned_data["codigopostal"])
+           pais = self.cleaned_data['nacionalidad'],region = self.cleaned_data["region"],ciudad = self.cleaned_data["ciudad"],codigopostal = self.cleaned_data["codigopostal"])
         return user
 
 class ProductoForm(ModelForm):
