@@ -77,9 +77,10 @@ class Transportista (models.Model):
 class clienteExterno (models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     nombre = models.CharField(max_length=60)
-    ID = models.CharField(max_length=10)
+    id_internacional = models.CharField(max_length=10)
     pais = CountryField()
     region = models.CharField(max_length=40)
+    telefono = models.IntegerField() 
     ciudad = models.CharField(max_length=60)
     codigopostal = models.IntegerField()
     correo = models.EmailField(max_length=254)
