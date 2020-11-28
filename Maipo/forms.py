@@ -129,7 +129,7 @@ class ClienteExternoLoginForm(UserCreationForm):
         user = super(ClienteExternoLoginForm, self).save(commit=False)
         user.is_clienteExterno = True
         user.save()
-        clienteInternacional = clienteExterno.objects.create(user=user, nombre = self.cleaned_data["nombre"], correo = self.cleaned_data["correo"], rut = self.cleaned_data["rut"],
+        clienteInternacional = clienteExterno.objects.create(user=user, nombre = self.cleaned_data["nombre"], correo = self.cleaned_data["correo"], id = self.cleaned_data["rut"],
             telefono = self.cleaned_data["telefono"],pais = self.cleaned_data['nacionalidad'],region = self.cleaned_data["region"],ciudad = self.cleaned_data["ciudad"],codigopostal = self.cleaned_data["codigopostal"])
         return user
 
