@@ -121,7 +121,7 @@ class ClienteExternoLoginForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ('username','nombre','correo','ID','telefono','nacionalidad','region','ciudad','codigopostal')
+        fields = ('username','nombre','correo','ID','nacionalidad','region','ciudad','codigopostal')
 
     @transaction.atomic
     def save(self):
