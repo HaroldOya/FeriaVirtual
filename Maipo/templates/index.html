@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
+{% block head %}
+    <link rel="manifest" href="{% static 'js/manifest.json' %}">
+{% endblock %}
 {% block content %}
 <main>
     <div class="col-lg-12">
