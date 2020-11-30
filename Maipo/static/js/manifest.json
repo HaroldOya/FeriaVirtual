@@ -1,0 +1,29 @@
+{
+    "name": "Feria Virtual",
+    "short_name": "Feria Virtual",
+    "icons": [{
+      "src": "img/icons/ferialogo.png",
+        "sizes": "128x128",
+        "type": "img/png"
+      }, {
+        "src": "img/icons/ferialogo.png",
+        "sizes": "144x144",
+        "type": "img/png"
+      }, {
+        "src": "img/icons/ferialogo.png",
+        "sizes": "152x152",
+        "type": "img/png"
+      }, {
+        "src": "img/icons/ferialogo.png",
+        "sizes": "192x192",
+        "type": "img/png"
+      }, {
+        "src": "img/icons/ferialogo.png",
+        "sizes": "256x256",
+        "type": "img/png"
+      }],
+    "start_url": "/index.html",
+    "display": "standalone",
+    "background_color": "#pink",
+    "theme_color": "#pink"
+  }
