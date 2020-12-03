@@ -1,17 +1,17 @@
 {
   "name": "Feria Virutal",
   "short_name": "FeriaVirtual",
-  "start_url": "/",
+  "start_url": "/index.html",
   "display": "standalone",
   "background_color": "#fff",
   "description": "El mejor lugar para vender tu productos y transportalos.",
   "icons": [{
     "src": "static/img/icons/1.png",
     "sizes": "152x152",
-    "type": "img/png"
+    "type": "image/png"
   }, {
     "src": "static/img/icons/2.png",
     "sizes": "144x144",
-    "type": "img/png"
+    "type": "image/png"
   }]
 }
