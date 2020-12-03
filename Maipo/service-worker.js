@@ -3,7 +3,7 @@ var filesToCache = [
     '/',
     '/js/app.js',
     '/js/menu.js',
-    '/js/service-worker.js',
+    './service-worker.js',
     '/js/formulario.js',
     '/js/jquery-3.5.1.min.js',
     '/js/letras.js',
