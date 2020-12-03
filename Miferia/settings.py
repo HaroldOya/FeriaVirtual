@@ -15,6 +15,7 @@ import sys
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+PWA_SERVICE_WORKER_PATH = os.path.join(BASE_DIR, 'Maipo/static/js', 'serviceworker.js')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
@@ -47,7 +48,8 @@ INSTALLED_APPS = [
     'Maipo',
     'cart',
     'django_countries',
-    'localflavor'
+    'localflavor',
+    'pwa'
     ]
     
 MIDDLEWARE = [
