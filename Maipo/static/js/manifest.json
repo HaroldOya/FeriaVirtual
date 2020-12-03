@@ -1,21 +1,17 @@
 {
-    "name": "Feria Virtual",
-    "short_name": "Feria Virtual",
-    "icons": [{
-      "src": "/static/img/icons/3.png",
-        "sizes": "128x128",
-        "type": "img/png"
-      }, {
-        "src": "/static/img/icons/2.png",
-        "sizes": "144x144",
-        "type": "img/png"
-      }, {
-        "src": "/static/img/icons/1.png",
-        "sizes": "152x152",
-        "type": "img/png"
-        }],
-        "start_url": "/index.html",
-        "display": "standalone",
-        "background_color": "#3E4EB8",
-        "theme_color": "#2F3BA2"
-  }
+  "name": "Feria Virutal",
+  "short_name": "FeriaVirtual",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fff",
+  "description": "El mejor lugar para vender tu productos y transportalos.",
+  "icons": [{
+    "src": "img/icons/1.png",
+    "sizes": "152x152",
+    "type": "image/png"
+  }, {
+    "src": "img/icons/2.png",
+    "sizes": "144x144",
+    "type": "image/png"
+  }]
+}
