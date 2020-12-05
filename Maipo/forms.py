@@ -2,7 +2,7 @@ from django import forms
 from django.forms import ModelForm
 from django.db import transaction
 from django.contrib.auth.forms import UserCreationForm
-from .models import Productor,Producto, subasta, User, Transportista, clienteLocal, clienteExterno
+from .models import Productor,Producto, subasta, User, Transportista, clienteLocal, clienteExterno, Contrato
 from django.core.validators import MaxValueValidator
 from django_countries.widgets import CountrySelectWidget
 from django_countries.fields import CountryField
@@ -56,6 +56,7 @@ class ProductorLoginForm(UserCreationForm):
     rut = forms.CharField(max_length=100, required=True)
     edad = forms.IntegerField(required=False)
     telefono = forms.CharField(max_length=100, required=True)
+    contrato = forms.ModelChoiceField(queryset=Contrato.objects.all())
 
     GENEROS = [
     ('femenino', 'Femenino'),
@@ -69,7 +70,7 @@ class ProductorLoginForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ('username','nombre','correo','rut','edad','telefono','genero','nacionalidad','direccion')
+        fields = ('username','nombre','correo','rut','edad','telefono','genero','nacionalidad','direccion','contrato')
 
     @transaction.atomic
     def save(self):
@@ -78,7 +79,7 @@ class ProductorLoginForm(UserCreationForm):
         user.save()
         productor = Productor.objects.create(user=user, nombre = self.cleaned_data["nombre"], correo = self.cleaned_data["correo"], rut = self.cleaned_data["rut"],
             edad = self.cleaned_data["edad"], telefono = self.cleaned_data["telefono"], genero = self.cleaned_data["genero"], nacionalidad = self.cleaned_data["nacionalidad"],
-            direccion = self.cleaned_data["direccion"])
+            direccion = self.cleaned_data["direccion"], contrato = self.cleaned_data["contrato"])
         return user
 
 class TransportistaLoginForm(UserCreationForm):

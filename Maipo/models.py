@@ -35,6 +35,16 @@ class User(AbstractUser):
     is_consultor = models.BooleanField(default=False)
 
 
+class Contrato(models.Model):
+    codigoContrato = models.CharField(max_length=50)
+    fechaCreacion = models.DateField(auto_now=True, auto_now_add=False)
+    descripcion = models.TextField()
+    fechaTermino = models.DateField(auto_now=False, auto_now_add=False)
+
+    def __str__(self):
+        return self.codigoContrato
+
+
 class Productor (models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     nombre = models.CharField(max_length=60)
@@ -45,6 +55,7 @@ class Productor (models.Model):
     genero = models.CharField(max_length=10)
     direccion = models.CharField(max_length=500)
     nacionalidad = CountryField()
+    contrato = models.ForeignKey(Contrato, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.nombre
@@ -129,3 +140,4 @@ class Pedidos (models.Model):
     productor = models.ForeignKey(Productor, on_delete=models.PROTECT)
     ESTADOS = (('Pagado','Pagado'),('En_Subasta','En Subasta'),('En_Camino','En Camino'),('Finalizado','Finalizado'))
     estadoDelPedido = models.CharField(max_length=30,choices=ESTADOS, default="Pagado")
+
